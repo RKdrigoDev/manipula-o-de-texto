@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class DNA {
+    public static void main(String[] args) {
+        String[] dna = new String[2];
+        lerDna(dna);
+        validar(dna);
+    }
+
+    public static void lerDna(String[] dna) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("digite o Dna do pai");
+        dna[0] = sc.nextLine();
+        System.out.println("digite o Dna do filho");
+        dna[1] = sc.nextLine();
+
+    }
+
+    public static void validar(String[] dna) {
+        boolean characterValido = true;
+        boolean mesmoTamanho= true;
+for (int i = 0; i < dna.length; i++) {
+    dna[i] = dna[i].toLowerCase();
+    char[] letra = dna[i].toCharArray();
+    for (int j = 0; j < letra.length; j++) {
+        if (letra[j] != 'a'&&letra[j] != 'g'&&letra[j] != 't'&&letra[j] != 'c') {
+            System.out.println("um dos DNA está errado , pois contém um character inválido");
+            characterValido = false;
+            break;
+        }
+
+    }
+}
+if (dna[0].length()!=dna[1].length()) {
+    System.out.println("não tem o mesmo tamanho");
+    mesmoTamanho = false;
+}
+if (characterValido&&mesmoTamanho) {
+    System.out.println("DNA valido");
+    compararSequencias(dna);
+    }
+}
+public static void compararSequencias(String[] dna) {
+        String pai=dna[0];
+        String filho=dna[1];
+        int totalGenes=pai.length();
+        int genesIguais=0;
+        int genesDiferentes=0;
+        for(int i=0;i<totalGenes;i++) {
+           char genePai=pai.charAt(i);
+           char geneFilho=filho.charAt(i);
+           if (genePai==geneFilho) {
+               genesIguais++;
+           }
+           else {
+               genesDiferentes++;
+           }
+        }
+        double similaridade=((double)genesIguais/totalGenes)*100;
+    System.out.println("a porcentagem de similaridade é "+similaridade+"%");
+    System.out.println("são "+genesDiferentes+" genes diferentes" );
+
+}
+}
